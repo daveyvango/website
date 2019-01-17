@@ -1,0 +1,8 @@
+<h1>Welcome, chump.</h1>
+Sup, bruh?  Thanks for stopping in.  Have a look around this site.  It's super new and totall FRESSHHHHH... (kinda).
+<br/>
+<a href="./new">Write a New Blog Entry (or don't)</a>
+<h2>Recent Blogs</h2>
+{% for blogpost in recent_blogs %}
+  {{ blogpost.title }}: {{blogpost.text}} <br/>
+{% endfor %}

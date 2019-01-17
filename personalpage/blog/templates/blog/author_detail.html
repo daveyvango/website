@@ -1,0 +1,9 @@
+<h1>Author Details</h1>
+
+<h2>{{ author.first_name }} {{author.surname}} (a.k.a. {{ author.handle }})</h1>
+
+{% if author.blogpost_set %}
+    {% for blogpost in author.blogpost_set.all %}
+        <li><a href="{% url 'blog:detail' blogpost.id %}">{{blogpost.title}}</a>
+    {% endfor %}
+{% endif %}

@@ -24,7 +24,7 @@ SECRETS_FILE = os.path.dirname(os.path.abspath(__file__)) + "/secrets.txt"
 f = open(SECRETS_FILE)
 data = f.read()
 SECRET_KEY = data[0]
-DB_PW = data[1]
+DB_PW      = data[1]
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -35,6 +35,7 @@ ALLOWED_HOSTS = ['34.73.156.186']
 # Application definition
 
 INSTALLED_APPS = [
+    'blog.apps.BlogConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

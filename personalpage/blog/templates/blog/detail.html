@@ -1,0 +1,5 @@
+<h2>{{blog_post.title}}</h2>
+<p>
+{{ blog_post.text }}
+<p>
+Contributor: <a href="{% url 'blog:author_detail' blog_post.author.id %}">{{blog_post.author.handle }}</a>
