@@ -3,6 +3,8 @@ Sup, bruh?  Thanks for stopping in.  Have a look around this site.  It's super n
 <br/>
 <a href="./new">Write a New Blog Entry (or don't)</a>
 <h2>Recent Blogs</h2>
+<ul>
 {% for blogpost in recent_blogs %}
-  {{ blogpost.title }}: {{blogpost.text}} <br/>
+  <li><a href="{% url 'blog:detail' blogpost.id %}">{{blogpost.title}}</a> by {{blogpost.author.handle}}
 {% endfor %}
+</ul>
