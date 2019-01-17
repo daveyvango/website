@@ -36,7 +36,7 @@ fi
 # - Python 3.5
 # - PostgreSQL 9.6
 # - Django 2.1.5
-yum install -y -q rh-python35-python rh-postgresql96-postgresql rh-postgresql96-postgresql-server
+yum install -y -q rh-python35-python rh-python35-python-psycopg2 rh-postgresql96-postgresql rh-postgresql96-postgresql-server
 . /opt/rh/rh-python35/enable
 . /opt/rh/rh-postgresql96/enable
 pip install --upgrade pip
@@ -63,7 +63,7 @@ fi
 
 DATA_PATH='/var/opt/rh/rh-postgresql96/lib/pgsql/data'
 SERVICE=rh-postgresql96-postgresql
-DB_SCHEMA=webapp
+DB=webapp
 DB_USER=webappuser
 
 # Initialize the DB
@@ -89,10 +89,10 @@ if [[ -z "$(ls -A $DATA_PATH)" ]]; then
   # Set up application user
   # There is most likely a better way to accomplish this via a template, but this works for now
   cd /tmp/
-  su -m postgres -c "psql -c \"CREATE SCHEMA $DB_SCHEMA\""
   su -m postgres -c "psql -c \"CREATE USER $DB_USER PASSWORD '$DB_USER_PW'\""
-  su -m postgres -c "psql -c \"GRANT ALL ON SCHEMA $DB_SCHEMA to $DB_USER\""
-  su -m postgres -c "psql -c \"GRANT ALL ON ALL TABLES IN SCHEMA $DB_SCHEMA to $DB_USER\""
+  su -m postgres -c "psql -c \"CREATE DATABASE $DB WITH OWNER $DB_USER"
+#  su -m postgres -c "psql -c \"GRANT ALL ON SCHEMA $DB_SCHEMA to $DB_USER\""
+#  su -m postgres -c "psql -c \"GRANT ALL ON ALL TABLES IN SCHEMA $DB_SCHEMA to $DB_USER\""
   # 
   echo "Database initallized and started"
 else
