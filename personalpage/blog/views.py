@@ -22,6 +22,9 @@ def author_detail(request, author_id):
 def new(request):
     return render(request, 'blog/new.html')
 
+def new_author(request):
+    return render(request, 'blog/new_author.html')
+
 def create(request):
     try:
         handle     = request.POST['author_handle']
@@ -39,3 +42,20 @@ def create(request):
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
         return HttpResponseRedirect(reverse('blog:detail', args=(blog_post.id,)))
+
+def create_author(request):
+    try:
+        handle     = request.POST['author_handle']
+        first_name = request.POST['first_name']
+        surname    = request.POST['surname']
+
+        author = Author(handle=handle, first_name=first_name, surname=surname, init_date=timezone.now())
+        author.save()
+    except:
+        # Redisplay the question voting form.
+        return HttpResponse("something broke.")
+    else:
+        # Always return an HttpResponseRedirect after successfully dealing
+        # with POST data. This prevents data from being posted twice if a
+        # user hits the Back button.
+        return HttpResponseRedirect(reverse('blog:author_detail', args=(author.id,)))

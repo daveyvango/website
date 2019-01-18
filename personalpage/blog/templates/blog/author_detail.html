@@ -1,9 +1,18 @@
-<h1>Author Details</h1>
-
-<h2>{{ author.first_name }} {{author.surname}} (a.k.a. {{ author.handle }})</h1>
-
+{% extends "base.html" %}
+{% block title %}About {{author.handle}}{% endblock %}
+{% load static %}
+{% block body %}
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+<h1 class="title">{{ author.first_name }} {{author.surname}}</h1>
+<p class="subtitle">
+    (a.k.a. {{ author.handle }})
+</p>
+Here are some of {{author.first_name}}'s recent posts:
 {% if author.blogpost_set %}
+<p>
     {% for blogpost in author.blogpost_set.all %}
         <li><a href="{% url 'blog:detail' blogpost.id %}">{{blogpost.title}}</a>
     {% endfor %}
+</p>
 {% endif %}
+{% endblock %}

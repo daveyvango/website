@@ -1,5 +1,11 @@
-<h2>{{blog_post.title}}</h2>
-<p>
-{{ blog_post.text }}
-<p>
-Contributor: <a href="{% url 'blog:author_detail' blog_post.author.id %}">{{blog_post.author.handle }}</a>
+{% extends "base.html" %}
+{% block title %}{{blog_post.title}} by {{blog_post.author.handle}}{% endblock %}
+{% load static %}
+{% block body %}
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+<h1 class="title">{{blog_post.title}}</h1>
+{{ blog_post.text }} 
+<br>
+Contributor: 
+<a href="{% url 'blog:author_detail' blog_post.author.id %}">{{blog_post.author.handle }}</a>
+{% endblock %}
