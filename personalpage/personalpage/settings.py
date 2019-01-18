@@ -127,3 +127,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+SECRETS_FILE = os.path.dirname(os.path.abspath(__file__)) + "/secrets.txt"
+STATICFILES_DIR = [ os.path.dirname(os.path.abspath(__file__)) + "/static", '/var/www/static' ]

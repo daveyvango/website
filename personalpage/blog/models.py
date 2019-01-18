@@ -17,5 +17,5 @@ class BlogPost(models.Model):
     post_date = models.DateTimeField('Date Posted')
 
     def get_recent_blogs():
-        recent_blogs = BlogPost.objects.order_by('post_date')[:5]
+        recent_blogs = BlogPost.objects.order_by('post_date')[:10]
         return recent_blogs
