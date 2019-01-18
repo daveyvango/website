@@ -1,14 +1,18 @@
-<h1>Authors</h1>
-
-<h2>Add a new author</h2>
+{% extends "base.html" %}
+{% block title %}New Author{% endblock %}
+{% load static %}
+{% block body %}
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+<h1 class="title">New Author</h1>
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 <form action="{% url 'blog:create_author' %}" method="post">
-{% csrf_token %}
-Author handle: <br>
-<input type="text" name="author_handle" id="author_handle"><br>
-First Name: <br>
-<input type="text" name="first_name" id="first_name"><br>
-Surname:<br>
-<input type="text" name="surname" id="surname"><br>
-<input type="submit" value="Submit">
+    {% csrf_token %}
+    Author handle: <br>
+    <input type="text" name="author_handle" id="author_handle"><br>
+    First Name: <br>
+    <input type="text" name="first_name" id="first_name"><br>
+    Surname:<br>
+    <input type="text" name="surname" id="surname"><br>
+    <input type="submit" value="Submit">
 </form>
+{% endblock %}

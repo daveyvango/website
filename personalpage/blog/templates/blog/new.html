@@ -1,14 +1,20 @@
-<h1>New Blog Post</h1>
-
+{% extends "base.html" %}
+{% block title %}New Blog Post{% endblock %}
+{% load static %}
+{% block body %}
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-
+<h1 class="title">New Blog Post</h1>
+<p class="subtitle">
+    Tell us what's on your mind.
+</p>
 <form action="{% url 'blog:create' %}" method="post">
-{% csrf_token %}
-Author handle: <br>
-<input type="text" name="author_handle" id="author_handle"><br>
-Title: <br>
-<input type="text" name="post_title" id="post_title"><br>
-Post Content:<br>
-<textarea rows="5" cols="10" name="post_text" id="post_text"></textarea>
-<input type="submit" value="Submit">
+    {% csrf_token %}
+    Author handle: <br>
+    <input type="text" name="author_handle" id="author_handle"><br>
+    Title: <br>
+    <input type="text" name="post_title" id="post_title"><br>
+    Post Content:<br>
+    <textarea rows="20" cols="100" name="post_text" id="post_text"></textarea>
+    <input type="submit" value="Submit">
 </form>
+{% endblock %}

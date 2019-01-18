@@ -1,14 +1,18 @@
-<h1>Welcome, chump.</h1>
+{% extends "base.html" %}
+{% block title %}Welcome{% endblock %}
 {% load static %}
-<img src="{% static "blog/fam.jpg" %}" alt="Family pic">
-<p>
-Oh hey... I didn't notice you there.  Come on in and have a look around.
-</p>
-<br/>
-<a href="./new">Write a New Blog Entry (or don't)</a>
-<h2>Recent Blogs</h2>
-<ul>
-{% for blogpost in recent_blogs %}
-  <li><a href="{% url 'blog:detail' blogpost.id %}">{{blogpost.title}}</a> by {{blogpost.author.handle}}
-{% endfor %}
-</ul>
+{% block body %}
+<h1 class="title">Welcome</h1>
+    <p class="subtitle">
+        Oh hey... I didn't notice you there.  Welcome to the VanGorder family personal page.  This is us:<br> 
+        <img src="{% static "blog/fam.jpg" %}" alt="Family pic"><br>
+        Come on in and have a look around.
+    </p>
+    <a href="./new">Write a New Blog Entry (or don't)</a>
+    <h2>Recent Blogs</h2>
+    <ul>
+    {% for blogpost in recent_blogs %}
+        <li><a href="{% url 'blog:detail' blogpost.id %}">{{blogpost.title}}</a> by {{blogpost.author.handle}}
+    {% endfor %}
+    </ul>
+{% endblock %}
