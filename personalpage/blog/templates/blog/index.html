@@ -9,10 +9,13 @@
         Come on in and have a look around.
     </p>
     <a href="./new">Write a New Blog Entry (or don't)</a>
+    <hr>
     <h2>Recent Blogs</h2>
+    <p>
     <ul>
     {% for blogpost in recent_blogs %}
         <li><a href="{% url 'blog:detail' blogpost.id %}">{{blogpost.title}}</a> by {{blogpost.author.handle}}
     {% endfor %}
     </ul>
+    <p>
 {% endblock %}

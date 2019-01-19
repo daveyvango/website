@@ -90,10 +90,8 @@ if [[ -z "$(ls -A $DATA_PATH)" ]]; then
   # There is most likely a better way to accomplish this via a template, but this works for now
   cd /tmp/
   su -m postgres -c "psql -c \"CREATE USER $DB_USER PASSWORD '$DB_USER_PW'\""
-  su -m postgres -c "psql -c \"CREATE DATABASE $DB WITH OWNER $DB_USER"
-#  su -m postgres -c "psql -c \"GRANT ALL ON SCHEMA $DB_SCHEMA to $DB_USER\""
-#  su -m postgres -c "psql -c \"GRANT ALL ON ALL TABLES IN SCHEMA $DB_SCHEMA to $DB_USER\""
-  # 
+  su -m postgres -c "psql -c \"CREATE DATABASE $DB WITH OWNER $DB_USER\""
+   
   echo "Database initallized and started"
 else
   echo "Good news, the DB is already initialized"
