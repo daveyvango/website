@@ -9,8 +9,8 @@
 </p>
 <form action="{% url 'blog:create' %}" method="post">
     {% csrf_token %}
-    Author handle: <br>
-    <input type="text" name="author_handle" id="author_handle"><br>
+    Author handle: <strong>{{ author }}</strong><br>
+    <input type="hidden" name="author_handle" id="author_handle" value="{{ author }}"><br>
     Title: <br>
     <input type="text" name="post_title" id="post_title"><br>
     Post Content:<br>
