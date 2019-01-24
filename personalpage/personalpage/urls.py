@@ -19,7 +19,8 @@ from django.conf.urls.static import static
 from django.conf import settings
 
 urlpatterns = [
-    path('blog/',  include('blog.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
     path('admin/', admin.site.urls),
+    path('blog/',  include('blog.urls')),
 #    path('images/', django.views.static.serve),
 ]

@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
-
+from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 
 from .models import BlogPost, Author
@@ -19,11 +19,18 @@ def author_detail(request, author_id):
     author = Author.objects.get(pk=author_id)
     return render(request, 'blog/author_detail.html', {'author': author })
 
+@login_required
 def new(request):
-    return render(request, 'blog/new.html')
+    if request.user.is_authenticated:
+        return render(request, 'blog/new.html', {'author': request.user.get_username })
+    else:
+        return render(request, 'blog/login_redirect.html')
 
 def new_author(request):
-    return render(request, 'blog/new_author.html')
+    if request.user.is_authenticated:
+        return render(request, 'blog/new_author.html')
+    else:
+        return render(request, 'blog/login_redirect.html')
 
 def create(request):
     try:

@@ -29,7 +29,7 @@ DB_PW      = data[1]
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['35.185.41.133', '104.196.193.182', '34.73.156.186']
+ALLOWED_HOSTS = ['35.185.41.133', '104.196.193.182', '34.73.156.186', '34.73.204.142']
 
 
 # Application definition
@@ -59,7 +59,7 @@ ROOT_URLCONF = 'personalpage.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -127,3 +127,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# Session configs
+LOGIN_REDIRECT_URL = '/blog/'
+EMAIL_BACKEND      = 'django.core.mail.backends.console.EmailBackend'
