@@ -36,7 +36,7 @@ fi
 # - Python 3.5
 # - PostgreSQL 9.6
 # - Django 2.1.5
-yum install -y -q rh-python35-python rh-python35-python-psycopg2 rh-postgresql96-postgresql rh-postgresql96-postgresql-server
+yum install -y -q rh-python35-python rh-python35-python-psycopg2 rh-python35-python-virtualenv rh-postgresql96-postgresql rh-postgresql96-postgresql-server
 . /opt/rh/rh-python35/enable
 . /opt/rh/rh-postgresql96/enable
 pip install --upgrade pip
@@ -95,3 +95,5 @@ if [[ -z "$(ls -A $DATA_PATH)" ]]; then
 else
   echo "Good news, the DB is already initialized"
 fi
+
+systemctl enable rh-postgresql96-postgresql
