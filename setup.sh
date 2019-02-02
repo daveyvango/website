@@ -36,10 +36,11 @@ fi
 # - Python 3.5
 # - PostgreSQL 9.6
 # - Django 2.1.5
-yum install -y -q rh-python35-python rh-python35-python-psycopg2 rh-python35-python-virtualenv rh-postgresql96-postgresql rh-postgresql96-postgresql-server
+yum install -y -q rh-python35-python rh-python35-python-psycopg2 rh-python35-python-virtualenv rh-python35-scldevel.x86_64 rh-python35-python-devel.x86_64 rh-postgresql96-postgresql rh-postgresql96-postgresql-server gcc nginx
 . /opt/rh/rh-python35/enable
 . /opt/rh/rh-postgresql96/enable
 pip install --upgrade pip
+pip install uwsgi
 pip install Django==2.1.5
 
 # Add paths to our user logged in user
