@@ -2,7 +2,8 @@
 {% block title %}Welcome{% endblock %}
 {% load static %}
 {% block body %}
-<h1 class="title">Welcome</h1>
+<section class="section">
+    <h1 class="title">Welcome</h1>
     <p class="subtitle">
         Oh hey... I didn't notice you there.  Welcome to the VanGorder family personal page.  This is us:<br> 
         <img src="{% static "blog/fam.jpg" %}" alt="Family pic"><br>
@@ -18,4 +19,5 @@
     {% endfor %}
     </ul>
     <p>
+</section>
 {% endblock %}

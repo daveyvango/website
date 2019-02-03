@@ -3,9 +3,30 @@
 {% load static %}
 {% block body %}
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-<h1 class="title">{{blog_post.title}}</h1>
-{{ blog_post.text }} 
 <br>
-Contributor: 
-<a href="{% url 'blog:author_detail' blog_post.author.id %}">{{blog_post.author.handle }}</a>
+
+    <section class="hero is-medium is-bold has-text-black">
+        <div class="hero-body banner-background has-text-black">
+            <div class="container has-text-centered box"> 
+                 <h1 class="title">{{blog_post.title}}</h1>
+                 <h2 class="subtitle">Contributor: <a href="{% url 'blog:author_detail' blog_post.author.id%}">{{blog_post.author.handle }}</a></h2>
+            </div>
+        </div>
+    </section>
+
+
+    <div class="container">
+        <!-- START ARTICLE FEED -->
+        <section class="articles">
+            <div class="column is-8 is-offset-2">
+                <!-- START ARTICLE -->
+                <div class="card article">
+                    <div class="card-content">
+                    {{ blog_post.text }} 
+                </div>
+            </div>
+         </section>
+        <!-- END ARTICLE FEED -->
+    </div>
+    <script async type="text/javascript" src="../js/bulma.js"></script>
 {% endblock %}
