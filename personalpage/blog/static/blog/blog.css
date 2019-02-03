@@ -1,0 +1,8 @@
+.banner-background {
+  background-image: url(/static/blog/forest.jpg);
+  max-width: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  text-shadow: 3px 3px #FFFFFF;
+  color: #000000;
+}

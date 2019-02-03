@@ -29,8 +29,7 @@ DB_PW      = data[1]
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['35.185.41.133', '104.196.193.182', '34.73.156.186', '34.73.204.142']
-
+ALLOWED_HOSTS = [ '*' ]
 
 # Application definition
 
