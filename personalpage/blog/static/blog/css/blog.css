@@ -1,0 +1,62 @@
+:root {
+  /* colors */
+  /* --primary-blue: #0099cc; */
+  --primary-blue: #191970;
+  --primary-orange: #ac1900;
+  --secondary-orange: #e65100;
+  --primary-text: #000000;
+  --gray-text: #505050;
+  --light-text: #ffffff;
+  --light-gray-background: #dddddd;
+
+  /* fonts sizes */
+  --title-size: 17px;
+  --subtitle-size: 15px;
+  --desc-size: 13px;
+}
+
+.title {
+  color: var(--primary-orange);
+}
+
+.subtitle {
+  color: var(--secondary-orange);
+}
+
+.card-content {
+  color: var(--gray-text);
+}
+
+/*
+.banner-background {
+  background-image: url(/static/blog/images/forest.jpg);
+  max-width: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  text-shadow: 3px 3px #FFFFFF;
+  color: #0000ff;
+}
+*/
+
+.navbar-brand {
+  background-color: var(--primary-blue);
+  color: var(--light-text);
+}
+
+.navbar-menu {
+  background-color: var(--primary-blue);
+}
+
+.navbar-item {
+  color: var(--secondary-orange);
+}
+
+.navbar-link {
+  color: var(--secondary-orange);
+}
+
+.logo-text{
+  color: var(--secondary-orange);
+  font-size: 20px;
+  font-weight: bold;
+}

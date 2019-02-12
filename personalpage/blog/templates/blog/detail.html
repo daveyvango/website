@@ -5,8 +5,8 @@
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 <br>
 
-    <section class="hero is-medium is-bold has-text-black">
-        <div class="hero-body banner-background has-text-black">
+    <section class="hero is-medium is-bold">
+        <div class="hero-body">
             <div class="container has-text-centered box"> 
                  <h1 class="title">{{blog_post.title}}</h1>
                  <h2 class="subtitle">Contributor: <a href="{% url 'blog:author_detail' blog_post.author.id%}">{{blog_post.author.handle }}</a></h2>
@@ -16,16 +16,15 @@
 
 
     <div class="container">
-        <!-- START ARTICLE FEED -->
         <section class="articles">
             <div class="column is-8 is-offset-2">
                 <!-- START ARTICLE -->
                 <div class="card article">
-                    <div class="card-content">
-                    {{ blog_post.text }} 
+                    <div class="card-content" id="blog_body"></div>
                 </div>
             </div>
          </section>
         <!-- END ARTICLE FEED -->
     </div>
+    <div id="blog_body"><script type='application/javascript'>fetchBlog({{blog_post.id}})</script>
 {% endblock %}

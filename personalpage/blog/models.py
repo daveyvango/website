@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from tinymce.models import HTMLField
 
 class Author(models.Model):
     # Author's Screen Name
@@ -14,6 +15,7 @@ class BlogPost(models.Model):
     # Post details
     title     = models.CharField(max_length=50, unique=True)
     text      = models.CharField(max_length=1000)
+    text      = HTMLField()
     post_date = models.DateTimeField('Date Posted')
 
     def get_recent_blogs():

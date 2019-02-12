@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.urls import reverse
 from django.http import HttpResponse
+from django.http import JsonResponse
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django.utils import timezone
@@ -14,6 +15,17 @@ def index(request):
 def detail(request, blog_id):
     blog_post = BlogPost.objects.get(pk=blog_id)
     return render(request, 'blog/detail.html', {'blog_post': blog_post})
+
+def detail_json(request, blog_id):
+    blog_post = BlogPost.objects.get(pk=blog_id)
+    blog_post_data = {
+        'author':    blog_post.author.handle,
+        'title':     blog_post.title,
+        'text':      blog_post.text,
+        'post_date': blog_post.post_date
+    }
+    return JsonResponse(blog_post_data);
+
 
 def author_detail(request, author_id):
     author = Author.objects.get(pk=author_id)
@@ -41,9 +53,9 @@ def create(request):
         author = Author.objects.filter(handle=handle)[0]
         blog_post = BlogPost(text=post_text, author=author, title=post_title, post_date=timezone.now())
         blog_post.save()
-    except:
+    except Exception as e:
         # Redisplay the question voting form.
-        return HttpResponse("something broke.")
+        return HttpResponse('%s (%s)' % (e.message, type(e)))
     else:
         # Always return an HttpResponseRedirect after successfully dealing
         # with POST data. This prevents data from being posted twice if a

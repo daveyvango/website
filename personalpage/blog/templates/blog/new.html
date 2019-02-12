@@ -1,6 +1,10 @@
 {% extends "base.html" %}
-{% block title %}New Blog Post{% endblock %}
 {% load static %}
+{% block title %}New Blog Post{% endblock %}
+{% block scripts %}
+  <script src="{% static 'blog/js/tinymce/tinymce.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'blog/js/tinymce/editor.js' %}" ></script>
+{% endblock %}
 {% block body %}
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 <h1 class="title">New Blog Post</h1>
@@ -14,7 +18,7 @@
     Title: <br>
     <input type="text" name="post_title" id="post_title"><br>
     Post Content:<br>
-    <textarea rows="20" cols="100" name="post_text" id="post_text"></textarea>
+    <textarea id="post_text" name="post_text" width="75%"></textarea>
     <input type="submit" value="Submit">
 </form>
 {% endblock %}
