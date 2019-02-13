@@ -4,8 +4,9 @@ function fetchBlog(id){
                 return (response.json());
         })
         .then(function(data) {
-                console.log(data);
-                document.getElementById('blog_body').innerHTML = data.text;
+                console.log(data.text);
+                let blog_text = data.text
+                document.getElementById('blog_body').innerHTML = blog_text;
         });
 }
 

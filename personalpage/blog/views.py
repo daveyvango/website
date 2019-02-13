@@ -66,8 +66,8 @@ def update(request):
     try:
         blog_post            = BlogPost.objects.get(pk=request.POST['blog_id'])
         handle               = request.POST['author_handle']
-        blog_post.post_title = request.POST['post_title']
-        blog_post.post_text  = request.POST['post_text']
+        blog_post.title = request.POST['post_title']
+        blog_post.text  = request.POST['post_text']
 
         blog_post.author     = Author.objects.filter(handle=handle)[0]
         blog_post.save()

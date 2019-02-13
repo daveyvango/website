@@ -19,13 +19,11 @@
     </section>
 
 
-    <div class="container">
-        <section class="articles">
-            <div class="column is-8 is-offset-2">
+            <div class="is-8 is-offset-2">
                 <!-- START ARTICLE -->
-                <div id="blog_container" class="card article">
-                    <div class="card-content" id="blog_body"></div>
-                </div>
+                    <div id="blog_body">
+                        <script type='application/javascript'>fetchBlog({{blog_post.id}})</script>
+                    </div>
                 {% if user.is_authenticated %}
                 <div id="blog_editor">
                     <form action="{% url 'blog:update' %}" method="post">
@@ -42,9 +40,7 @@
                 </div>
                 {% endif %}
             </div>
-         </section>
         <!-- END ARTICLE FEED -->
-    </div>
-    <div id="blog_body"><script type='application/javascript'>fetchBlog({{blog_post.id}})</script>
     <button id="edit_blog" onclick="fetchBlogToEdit({{blog_post.id}})">Edit</button>
+    <div id="blog_text"></div>
 {% endblock %}
