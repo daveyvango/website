@@ -10,13 +10,17 @@ function fetchBlog(id){
         });
 }
 
-function fetchBlogToEdit(id){
-        fetch('/blog/' + id + '/json')
+function deleteBlog(id){
+        let formData = new FormData();
+        alert (id);
+        formData.append('blog_id', id);
+        formData.append('csrfmiddlewaretoken', document.getElementById('csrfmiddlewaretoken').value);
+        fetch('/blog/delete/', { 
+          method: "POST", 
+          body: formData 
+        })
         .then(function(response) {
+                console.log( "deleted " + id);
                 return (response.json());
         })
-        .then(function(data) {
-                console.log(data);
-                document.getElementById('post_text').value = data.text;
-        });
 }

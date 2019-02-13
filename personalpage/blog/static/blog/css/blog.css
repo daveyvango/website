@@ -64,3 +64,10 @@ body{
   font-size: 20px;
   font-weight: bold;
 }
+
+.blog-body > h1 {
+  font-size: 2em;
+}
+.blog-body > h2 {
+  font-size: 1.5em;
+}

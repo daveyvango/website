@@ -21,10 +21,11 @@
 
             <div class="is-8 is-offset-2">
                 <!-- START ARTICLE -->
-                    <div id="blog_body">
+                    <div id="blog_body" class="blog-body">
                         <script type='application/javascript'>fetchBlog({{blog_post.id}})</script>
                     </div>
                 {% if user.is_authenticated %}
+                <hr>
                 <div id="blog_editor">
                     <form action="{% url 'blog:update' %}" method="post">
                         {% csrf_token %}
@@ -35,12 +36,12 @@
                         <input type="text" name="post_title" id="post_title" value="{{blog_post.title}}"><br>
                         Post Content:<br>
                         <textarea id="post_text" name="post_text" width="75%">{{blog_post.text}}</textarea>
-                        <input type="submit" value="Submit">
+                        <button type="submit" class="button is-primary">Update</button>
+                        <button class="button is-secondary" onclick="deleteBlog({{blog_post.id}})">Delete Post</button>
                     </form>
                 </div>
                 {% endif %}
             </div>
         <!-- END ARTICLE FEED -->
-    <button id="edit_blog" onclick="fetchBlogToEdit({{blog_post.id}})">Edit</button>
     <div id="blog_text"></div>
 {% endblock %}

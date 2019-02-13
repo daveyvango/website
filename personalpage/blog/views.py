@@ -80,6 +80,20 @@ def update(request):
         # user hits the Back button.
         return HttpResponseRedirect(reverse('blog:detail', args=(blog_post.id,)))
 
+def delete(request):
+    try:
+        blog_post            = BlogPost.objects.get(pk=request.POST['blog_id'])
+        return HttpResponse(" yup ")
+        blog_post.delete()
+    except Exception as e:
+        # Redisplay the question voting form.
+        return HttpResponse('%s (%s)' % (e.message, type(e)))
+    else:
+        # Always return an HttpResponseRedirect after successfully dealing
+        # with POST data. This prevents data from being posted twice if a
+        # user hits the Back button.
+        return HttpResponseRedirect(reverse('blog:index'))
+
 def create_author(request):
     try:
         handle     = request.POST['author_handle']
