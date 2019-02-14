@@ -1,0 +1,14 @@
+[Unit]
+Description=gunicorn daemon
+After=network.target
+
+[Service]
+User=django
+Group=nginx
+
+WorkingDirectory=/opt/django/personalpage
+ExecStart=/opt/django/personalpage/gunicorn.sh start
+ExecStop=/opt/django/personalpage/gunicorn.sh stop
+
+[Install]
+WantedBy=multi-user.target

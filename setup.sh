@@ -40,9 +40,7 @@ yum install -y -q rh-python35-python rh-python35-python-psycopg2 rh-python35-pyt
 . /opt/rh/rh-python35/enable
 . /opt/rh/rh-postgresql96/enable
 pip install --upgrade pip
-pip install Django==2.1.5
-pip install uwsgi
-pip install django-tinymce
+pip install Django==2.1.5 uwsgi django-timymce gunicorn
 
 # Add paths to our user logged in user
 if ! /usr/bin/grep '. /opt/rh/rh-python35/enable' /home/$(logname)/.bashrc; then
@@ -99,3 +97,27 @@ else
 fi
 
 systemctl enable rh-postgresql96-postgresql
+
+# Create a django user for actually running this project and copy files over
+useradd django
+mkdir /opt/django
+chmod 710 /opt/django
+cp -R personalpage /opt/django/
+chown -R django:nginx /opt/django
+cp gunicorn.sh /opt/django/personalpage
+chmod 744 /opt/django/personalpage/gunicorn.sh 
+mkdir -p /usr/share/nginx/html/django/static
+chown -R django:nginx /usr/share/nginx/html/django
+
+# Enable gunicorn and NGINX services
+cp gunicorn.service /etc/systemd/system/gunicorn.service
+cp nginx.conf /etc/nginx/nginx.conf
+systemctl start  gunicorn.service
+systemctl enable gunicorn.service
+systemctl start  gunicorn.service
+systemctl enable gunicorn.service
+
+# Allow nginx to see django's home dir.
+sudo usermod -a -G user nginx
+
+su -m django -c "python manage.py collectstatic"
