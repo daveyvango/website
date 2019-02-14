@@ -40,8 +40,9 @@ yum install -y -q rh-python35-python rh-python35-python-psycopg2 rh-python35-pyt
 . /opt/rh/rh-python35/enable
 . /opt/rh/rh-postgresql96/enable
 pip install --upgrade pip
-pip install uwsgi
 pip install Django==2.1.5
+pip install uwsgi
+pip install django-tinymce
 
 # Add paths to our user logged in user
 if ! /usr/bin/grep '. /opt/rh/rh-python35/enable' /home/$(logname)/.bashrc; then

@@ -1,12 +1,16 @@
 {% extends "base.html" %}
 {% block title %}{{blog_post.title}} by {{blog_post.author.handle}}{% endblock %}
 {% load static %}
+{% block scripts %}
+  <script src="{% static 'blog/js/tinymce/tinymce.min.js' %}"></script>
+  <script type="text/javascript" src="{% static 'blog/js/tinymce/editor.js' %}" ></script>
+{% endblock %}
 {% block body %}
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 <br>
 
-    <section class="hero is-medium is-bold has-text-black">
-        <div class="hero-body banner-background has-text-black">
+    <section class="hero is-medium is-bold">
+        <div class="hero-body">
             <div class="container has-text-centered box"> 
                  <h1 class="title">{{blog_post.title}}</h1>
                  <h2 class="subtitle">Contributor: <a href="{% url 'blog:author_detail' blog_post.author.id%}">{{blog_post.author.handle }}</a></h2>
@@ -15,17 +19,34 @@
     </section>
 
 
-    <div class="container">
-        <!-- START ARTICLE FEED -->
-        <section class="articles">
-            <div class="column is-8 is-offset-2">
+            <div class="is-8 is-offset-2">
                 <!-- START ARTICLE -->
-                <div class="card article">
-                    <div class="card-content">
-                    {{ blog_post.text }} 
+                    <div id="blog_body" class="blog-body">
+                        <script type='application/javascript'>fetchBlog({{blog_post.id}})</script>
+                    </div>
+                {% if user.is_authenticated %}
+                <hr>
+                <div id="blog_editor">
+                    <form id="blog_update" action="{% url 'blog:update' %}" method="post">
+                        {% csrf_token %}
+                        Author handle: <strong>{{ blog_post.author.handle }}</strong><br>
+                        <input type="hidden" name="author_handle" id="author_handle" value="{{ blog_post.author.handle}}"><br>
+                        <input type="hidden" name="blog_id" id="blog_id" value="{{ blog_post.id}}"><br>
+                        Title: <br>
+                        <input type="text" name="post_title" id="post_title" value="{{blog_post.title}}"><br>
+                        Post Content:<br>
+                        <textarea id="post_text" name="post_text" width="75%">{{blog_post.text}}</textarea>
+                        <button type="submit" class="button is-primary">Update</button>
+                    </form>
+                    <br><br>
+                    <form id="delete_blog" action="{% url 'blog:delete' %}" method="post">
+                      {% csrf_token %}
+                      <input type="hidden" name="blog_id" id="blog_id" value="{{ blog_post.id}}"><br>
+                    </form>
+                    <button class="button is-secondary" onclick="deleteBlog({{blog_post.id}})">Delete Post</button>
                 </div>
+                {% endif %}
             </div>
-         </section>
         <!-- END ARTICLE FEED -->
-    </div>
+    <div id="blog_text"></div>
 {% endblock %}
