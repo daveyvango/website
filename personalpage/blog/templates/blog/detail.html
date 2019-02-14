@@ -27,7 +27,7 @@
                 {% if user.is_authenticated %}
                 <hr>
                 <div id="blog_editor">
-                    <form action="{% url 'blog:update' %}" method="post">
+                    <form id="blog_update" action="{% url 'blog:update' %}" method="post">
                         {% csrf_token %}
                         Author handle: <strong>{{ blog_post.author.handle }}</strong><br>
                         <input type="hidden" name="author_handle" id="author_handle" value="{{ blog_post.author.handle}}"><br>
@@ -37,8 +37,13 @@
                         Post Content:<br>
                         <textarea id="post_text" name="post_text" width="75%">{{blog_post.text}}</textarea>
                         <button type="submit" class="button is-primary">Update</button>
-                        <button class="button is-secondary" onclick="deleteBlog({{blog_post.id}})">Delete Post</button>
                     </form>
+                    <br><br>
+                    <form id="delete_blog" action="{% url 'blog:delete' %}" method="post">
+                      {% csrf_token %}
+                      <input type="hidden" name="blog_id" id="blog_id" value="{{ blog_post.id}}"><br>
+                    </form>
+                    <button class="button is-secondary" onclick="deleteBlog({{blog_post.id}})">Delete Post</button>
                 </div>
                 {% endif %}
             </div>

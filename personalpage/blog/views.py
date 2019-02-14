@@ -83,7 +83,6 @@ def update(request):
 def delete(request):
     try:
         blog_post            = BlogPost.objects.get(pk=request.POST['blog_id'])
-        return HttpResponse(" yup ")
         blog_post.delete()
     except Exception as e:
         # Redisplay the question voting form.

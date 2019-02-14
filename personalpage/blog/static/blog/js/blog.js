@@ -11,8 +11,15 @@ function fetchBlog(id){
 }
 
 function deleteBlog(id){
-        let formData = new FormData();
-        alert (id);
+        
+        if (confirm("Are you sure you want to delete this post?")){
+            alert ( "You deleted it" );
+            document.getElementById('delete_blog').submit();
+        }
+        else {
+            alert ( "Good idea.  You can always delete later.");
+        }
+/*        let formData = new FormData();
         formData.append('blog_id', id);
         formData.append('csrfmiddlewaretoken', document.getElementById('csrfmiddlewaretoken').value);
         fetch('/blog/delete/', { 
@@ -23,4 +30,5 @@ function deleteBlog(id){
                 console.log( "deleted " + id);
                 return (response.json());
         })
+        */
 }
