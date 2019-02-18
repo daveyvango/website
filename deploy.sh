@@ -19,7 +19,22 @@
 # Create a django user for actually running this project and copy files over
 DEPLOY_PATH=/opt/django
 PROJECT=personalpage
-useradd django
+PROC_ID=django
+useradd $PROC_ID
+
+echo "Enabling python"
+. /opt/rh/rh-python35/enable
+
+# Add paths to our user logged in user
+if ! /usr/bin/grep '. /opt/rh/rh-python35/enable' /home/$PROC_ID/.bashrc; then
+  echo 'Adding Python 3.5 to logged in user path'
+  echo -e "\n. /opt/rh/rh-python35/enable" >> /home/$PROC_ID/.bashrc
+fi
+
+if ! /usr/bin/grep '. /opt/rh/rh-postgresql96/enable' /home/$PROC_ID/.bashrc; then
+  echo 'Adding PostgreSQL 9.6 to logged in user path'
+  echo -e "\n. /opt/rh/rh-postgresql96/enable" >> /home/$PROC_ID/.bashrc
+fi
 
 echo "create deployment dir..."
 mkdir $DEPLOY_PATH
@@ -42,6 +57,9 @@ cp gunicorn.service /etc/systemd/system/gunicorn.service
 cp nginx.conf /etc/nginx/nginx.conf
 systemctl deamon-reload 
 
+echo "Setting up database tables"
+python manage.py migrate
+
 echo "Enabling and starting services!"
 systemctl restart gunicorn.service
 systemctl enable  gunicorn.service
@@ -51,9 +69,6 @@ systemctl enable  nginx.service
 # Allow nginx to be in django's group
 echo "updating nginx user"
 usermod -a -G django nginx
-
-echo "Enabling python"
-. /opt/rh/rh-python35/enable
 
 cd $DEPLOY_PATH/$PROJECT
 echo "'collectstatic' running"
