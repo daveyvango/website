@@ -133,7 +133,7 @@ STATIC_ROOT = '/usr/share/nginx/html/django/static'
 LOGIN_REDIRECT_URL = '/blog/'
 EMAIL_BACKEND      = 'django.core.mail.backends.console.EmailBackend'
 
-# Adding some extra security configs based on Django Docs
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
+# Additional security options
+# SESSION_COOKIE_SECURE = True
+# CSRF_COOKIE_SECURE = True
 X_FRAME_OPTIONS = 'DENY'

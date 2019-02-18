@@ -55,6 +55,11 @@ sed -i "s/ALLOWED_HOSTS = .*/ALLOWED_HOSTS = ['127.0.0.1']/g" $DEPLOY_PATH/$PROJ
 echo "getting configs into place..."
 cp gunicorn.service /etc/systemd/system/gunicorn.service
 cp nginx.conf /etc/nginx/nginx.conf
+
+echo "setting SELinux permissions"
+semanage fcontext -a -t httpd_var_run_t /opt/django/personalpage/personalpage.sock
+restorecon /opt/django/personalpage/personalpage.sock
+
 systemctl deamon-reload 
 
 echo "Setting up database tables"
