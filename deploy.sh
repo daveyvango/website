@@ -62,6 +62,11 @@ restorecon /opt/django/personalpage/personalpage.sock
 
 systemctl deamon-reload 
 
+echo "Setting up SSL with Let's Encrypt"
+yum -y install yum-utils
+yum-config-manager --enable rhui-REGION-rhel-server-extras rhui-REGION-rhel-server-optional
+yum install certbot python2-certbot-nginx
+
 echo "Setting up database tables"
 python manage.py migrate
 

@@ -13,8 +13,8 @@ class BlogPost(models.Model):
     # Author's Screen Name
     author    = models.ForeignKey(Author, on_delete=models.CASCADE)
     # Post details
-    title     = models.CharField(max_length=50, unique=True)
-    text      = models.CharField(max_length=1000)
+    title     = models.CharField(max_length=100, unique=True)
+    text      = models.CharField(max_length=15000)
     text      = HTMLField()
     post_date = models.DateTimeField('Date Posted')
 
