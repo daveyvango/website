@@ -98,8 +98,9 @@ def create_author(request):
         handle     = request.POST['author_handle']
         first_name = request.POST['first_name']
         surname    = request.POST['surname']
+        bio        = request.POST['bio']
 
-        author = Author(handle=handle, first_name=first_name, surname=surname, init_date=timezone.now())
+        author = Author(handle=handle, first_name=first_name, surname=surname, init_date=timezone.now(), bio=bio)
         author.save()
     except:
         # Redisplay the question voting form.

@@ -4,9 +4,8 @@
 {% block body %}
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 <h1 class="title">{{ author.first_name }} {{author.surname}}</h1>
-<p class="subtitle">
-    (a.k.a. {{ author.handle }})
-</p>
+<p class="subtitle"> (a.k.a. {{ author.handle }}) </p>
+<p>{{ author.bio }}</p>
 Here are some of {{author.first_name}}'s recent posts:
 {% if author.blogpost_set %}
 <p>
