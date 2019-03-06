@@ -3,6 +3,8 @@ Dynamic personal website.
 * Django
 * gunicorn
 * NGINX
+* Bulma CSS
+* TinyMCE plugin
 
 ## Setup
 
@@ -19,3 +21,4 @@ sudo ./setup.sh
 ```
 sudo ./deploy.sh
 ```
+5. Use pg_dump to export data from old server an import into new server.

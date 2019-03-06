@@ -61,7 +61,7 @@ systemctl deamon-reload
 echo "Setting up SSL with Let's Encrypt"
 yum -y install yum-utils
 yum-config-manager --enable rhui-REGION-rhel-server-extras rhui-REGION-rhel-server-optional
-yum install certbot python2-certbot-nginx
+yum -y install certbot python2-certbot-nginx
 
 echo "requesting certificate"
 certbot --nginx certonly --dry-run --domains respectablehack.com,www.respectablehack.com
@@ -69,6 +69,7 @@ certbot --nginx certonly --dry-run --domains respectablehack.com,www.respectable
 sudo crontab -u root renew.crontab
 
 echo "Setting up database tables"
+cd /etc/django/personalpage
 python manage.py migrate
 
 echo "Enabling and starting services!"
