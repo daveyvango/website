@@ -11,7 +11,7 @@
 <div align="center">
 <p class="subtitle">
     Tell us what's on your mind, {{ author }}!
-<form action="{% url 'blog:create' %}" method="post">
+<form action="{% url 'blog:create' %}" method="post" enctype="miltipart/form-data">
     {% csrf_token %}
     <input type="hidden" name="author_handle" id="author_handle" value="{{ author }}"><br>
     <div class="field">
@@ -19,6 +19,8 @@
              <div class="is-size-3 has-text-weight-bold has-text-centered">Title:</div> <input class="input is-large" type="text" name="post_title" id="post_title">
        </div>
     </div>
+    <div class="is-size-3 has-text-weight-bold has-text-centered">Banner Image:</div>
+    <input type="file" name="banner_img" id="banner_img">
     <div class="is-size-3 has-text-weight-bold has-text-centered">Post Content:</div>
     <textarea id="post_text" name="post_text" width="75%"></textarea>
     <div class="control">

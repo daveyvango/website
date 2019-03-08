@@ -49,6 +49,9 @@ def create(request):
         handle     = request.POST['author_handle']
         post_title = request.POST['post_title']
         post_text  = request.POST['post_text']
+        file_form  = UploadFileForm(request.POST, request.FILES)
+        file_handler = FileHandler()
+        file_handler.write_file(request.FILES['banner_img'])
 
         author = Author.objects.filter(handle=handle)[0]
         blog_post = BlogPost(text=post_text, author=author, title=post_title, post_date=timezone.now())
