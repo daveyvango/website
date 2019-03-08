@@ -1,10 +1,8 @@
 #!/bin/bash
-rsync -ru /usr/share/nginx/html/django/static/blog/ personalpage/blog/static/blog/ --stats --dry-run | grep 'Number of regular files transferred: 0'
+rsync -ru /usr/share/nginx/html/django/static/blog/ personalpage/blog/static/blog/ --stats --dry-run | grep -q 'Number of regular files transferred: 0'
 FILES_TRNSFD_COUNT=$?
 
-echo "\"$FILES_TRNSFD_COUNT\""
 if [[ "$FILES_TRNSFD_COUNT" == "0" ]]; then
-  echo "There are no files to sync"
   exit 0
 else
   echo "-----------------------------------"
@@ -16,4 +14,5 @@ else
   echo "Hint:"
   echo
   echo "rsync -ru /usr/share/nginx/html/django/static/blog/ personalpage/blog/static/blog/"
+  exit 1
 fi
