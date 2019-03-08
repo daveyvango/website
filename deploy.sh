@@ -90,3 +90,6 @@ echo "setting SELinux permissions"
 semanage fcontext -a -t httpd_var_run_t /opt/django/personalpage/personalpage.sock
 restorecon /opt/django/personalpage/personalpage.sock
 
+echo "Establishing upload permissions"
+semanage fcontext -a -t httpd_httpd_sys_rw_content_t /usr/share/nginx/html/django/static/blog/uploads
+restorcon /usr/share/nginx/html/django/static/blog/uploads
