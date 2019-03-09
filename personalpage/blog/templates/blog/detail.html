@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block title %}{{blog_post.title}} by {{blog_post.author.handle}}{% endblock %}
-{% block meta %}
+{% block meta_tags %}
   <meta name="keywords" content="{{ blog_post.meta_tags }}">
 {% endblock%}
 {% load static %}
