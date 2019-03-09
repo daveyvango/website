@@ -48,6 +48,7 @@ def new_author(request):
 def create(request):
     try:
         handle     = request.POST['author_handle']
+        meta_tags  = request.POST['meta_tags']
         post_title = request.POST['post_title']
         post_text  = request.POST['post_text']
         file_form  = UploadFileForm(request.POST, request.FILES)
@@ -70,17 +71,18 @@ def create(request):
 
 def update(request):
     try:
-        blog_post            = BlogPost.objects.get(pk=request.POST['blog_id'])
-        handle               = request.POST['author_handle']
-        blog_post.title = request.POST['post_title']
-        blog_post.text  = request.POST['post_text']
+        blog_post           = BlogPost.objects.get(pk=request.POST['blog_id'])
+        handle              = request.POST['author_handle']
+        blog_post.meta_tags = request.POST['meta_tags']
+        blog_post.title     = request.POST['post_title']
+        blog_post.text      = request.POST['post_text']
 
         file_form    = UploadFileForm(request.POST, request.FILES)
         file_handler = FileHandler()
         file_handler.write_file(request.FILES['banner_img'])
         blog_post.banner_img = request.FILES['banner_img']
 
-        blog_post.author     = Author.objects.filter(handle=handle)[0]
+        blog_post.author = Author.objects.filter(handle=handle)[0]
         blog_post.save()
     except Exception as e:
         # Redisplay the question voting form.
