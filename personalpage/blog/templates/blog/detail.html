@@ -11,7 +11,7 @@
 
     <section class="hero is-small is-bold">
         <div class="hero-body">
-            <div class="container has-text-centered box"> 
+            <div class="container has-text-centered box">
                  <h1 class="title">{{blog_post.title}}</h1>
                  <h2 class="subtitle">Contributor: <a href="{% url 'blog:author_detail' blog_post.author.id%}">{{blog_post.author.handle }}</a></h2>
             </div>
@@ -26,13 +26,14 @@
                 {% if user.is_authenticated %}
                 <hr>
                 <div id="blog_editor">
-                    <form id="blog_update" action="{% url 'blog:update' %}" method="post">
+                    <form id="blog_update" action="{% url 'blog:update' %}" method="post" enctype="multipart/form-data">
                         {% csrf_token %}
                         Author handle: <strong>{{ blog_post.author.handle }}</strong><br>
                         <input type="hidden" name="author_handle" id="author_handle" value="{{ blog_post.author.handle}}"><br>
                         <input type="hidden" name="blog_id" id="blog_id" value="{{ blog_post.id}}"><br>
                         Title: <br>
                         <input type="text" name="post_title" id="post_title" value="{{blog_post.title}}"><br>
+                        Banner Image <input type="file" name="banner_img" id="banner_img">
                         Post Content:<br>
                         <textarea id="post_text" name="post_text" width="75%">{{blog_post.text}}</textarea>
                         <button type="submit" class="button is-primary">Update</button>

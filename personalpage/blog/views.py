@@ -75,6 +75,11 @@ def update(request):
         blog_post.title = request.POST['post_title']
         blog_post.text  = request.POST['post_text']
 
+        file_form    = UploadFileForm(request.POST, request.FILES)
+        file_handler = FileHandler()
+        file_handler.write_file(request.FILES['banner_img'])
+        blog_post.banner_img = request.FILES['banner_img']
+
         blog_post.author     = Author.objects.filter(handle=handle)[0]
         blog_post.save()
     except Exception as e:

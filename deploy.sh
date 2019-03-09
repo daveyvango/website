@@ -68,10 +68,6 @@ certbot --nginx certonly --dry-run --domains respectablehack.com,www.respectable
 
 sudo crontab -u root renew.crontab
 
-echo "Setting up database tables"
-cd /etc/django/personalpage
-python manage.py migrate
-
 echo "Enabling and starting services!"
 systemctl restart gunicorn.service
 systemctl enable  gunicorn.service
@@ -82,7 +78,10 @@ systemctl enable  nginx.service
 echo "updating nginx user"
 usermod -a -G django nginx
 
+echo "Setting up database tables"
 cd $DEPLOY_PATH/$PROJECT
+su -m django -c "python manage.py migrate"
+
 echo "'collectstatic' running"
 su -m django -c "python manage.py collectstatic"
 
