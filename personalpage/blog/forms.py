@@ -1,4 +1,5 @@
 from django import forms
+from django.conf import settings
 
 class UploadFileForm(forms.Form):
     title = forms.CharField(max_length=50)
@@ -6,6 +7,8 @@ class UploadFileForm(forms.Form):
 
 class FileHandler():
     def write_file(self, f):
-        with open('/tmp/uploads/uploadedfile.jpg', 'wb+') as destination:
+        static_root = settings.STATIC_ROOT
+        file_path   = static_root + '/blog/uploads/' + f.name
+        with open(file_path, 'wb+') as destination:
             for chunk in f.chunks():
                 destination.write(chunk)

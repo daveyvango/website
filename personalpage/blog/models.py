@@ -12,11 +12,12 @@ class Author(models.Model):
 
 class BlogPost(models.Model):
     # Author's Screen Name
-    author    = models.ForeignKey(Author, on_delete=models.CASCADE)
+    author     = models.ForeignKey(Author, on_delete=models.CASCADE)
     # Post details
-    title     = models.CharField(max_length=100, unique=True)
-    text      = HTMLField()
-    post_date = models.DateTimeField('Date Posted')
+    title      = models.CharField(max_length=100, unique=True)
+    text       = HTMLField()
+    banner_img = models.CharField(max_length=100, unique=False, default="")
+    post_date  = models.DateTimeField('Date Posted')
 
     def get_recent_blogs():
         recent_blogs = BlogPost.objects.order_by('-post_date')[:10]

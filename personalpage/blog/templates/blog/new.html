@@ -11,7 +11,7 @@
 <div align="center">
 <p class="subtitle">
     Tell us what's on your mind, {{ author }}!
-<form action="{% url 'blog:create' %}" method="post" enctype="miltipart/form-data">
+<form action="{% url 'blog:create' %}" method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <input type="hidden" name="author_handle" id="author_handle" value="{{ author }}"><br>
     <div class="field">

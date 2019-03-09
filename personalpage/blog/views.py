@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils import timezone
 
 from .models import BlogPost, Author
+from .forms import UploadFileForm, FileHandler
 
 def index(request):
     recent_blogs = BlogPost.get_recent_blogs()
@@ -52,10 +53,12 @@ def create(request):
         file_form  = UploadFileForm(request.POST, request.FILES)
         file_handler = FileHandler()
         file_handler.write_file(request.FILES['banner_img'])
+        banner_img = request.FILES['banner_img']
 
         author = Author.objects.filter(handle=handle)[0]
-        blog_post = BlogPost(text=post_text, author=author, title=post_title, post_date=timezone.now())
+        blog_post = BlogPost(text=post_text, author=author, title=post_title, post_date=timezone.now(), banner_img=banner_img)
         blog_post.save()
+    # MultiValueDictError, PermissionError
     except Exception as e:
         # Redisplay the question voting form.
         return HttpResponse('%s (%s)' % (e.message, type(e)))

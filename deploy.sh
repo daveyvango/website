@@ -91,7 +91,7 @@ semanage fcontext -a -t httpd_var_run_t /opt/django/personalpage/personalpage.so
 restorecon /opt/django/personalpage/personalpage.sock
 
 echo "Establishing upload permissions"
-semanage fcontext -a -t httpd_httpd_sys_rw_content_t /usr/share/nginx/html/django/static/blog/uploads
-restorcon /usr/share/nginx/html/django/static/blog/uploads
+semanage fcontext -a -t httpd_sys_rw_content_t /usr/share/nginx/html/django/static/blog/uploads
+restorecon /usr/share/nginx/html/django/static/blog/uploads
 
 echo "Should be all set!"
