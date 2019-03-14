@@ -94,6 +94,9 @@ if [[ -z "$(ls -A $DATA_PATH)" ]]; then
   cd /tmp/
   su -m postgres -c "psql -c \"CREATE USER $DB_USER PASSWORD '$DB_USER_PW'\""
   su -m postgres -c "psql -c \"CREATE DATABASE $DB WITH OWNER $DB_USER\""
+
+  # Allow for creating test databases
+  su -m postgres -c "psql -c \"ALTER USER $DB_USER CREATEDB\""
   echo "Database initallized and started"
 else
   echo "Good news, the DB is already initialized"

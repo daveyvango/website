@@ -46,6 +46,7 @@ chown -R django:nginx $DEPLOY_PATH
 chmod 744 $DEPLOY_PATH/$PROJECT/gunicorn.sh 
 mkdir -p /usr/share/nginx/html/django/static
 chown -R django:nginx /usr/share/nginx/html/django
+chown -R django:django /usr/share/nginx/html/django/static/uploads
 
 echo "Cleaning up settings.py"
 sed -i 's/DEBUG = True/DEBUG = False/g' $DEPLOY_PATH/$PROJECT/$PROJECT/settings.py

@@ -47,8 +47,8 @@ def new_author(request):
 
 def create(request):
     try:
-        handle     = request.POST['author_handle']
         meta_tags  = request.POST['meta_tags']
+        handle     = request.POST['author_handle']
         post_title = request.POST['post_title']
         post_text  = request.POST['post_text']
         file_form  = UploadFileForm(request.POST, request.FILES)
@@ -67,7 +67,7 @@ def create(request):
         # Always return an HttpResponseRedirect after successfully dealing
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
-        return HttpResponseRedirect(reverse('blog:detail', args=(blog_post.id,)))
+        return HttpResponseRedirect(reverse('blog:detail', args=[blog_post.id]))
 
 def update(request):
     try:
@@ -91,7 +91,7 @@ def update(request):
         # Always return an HttpResponseRedirect after successfully dealing
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
-        return HttpResponseRedirect(reverse('blog:detail', args=(blog_post.id,)))
+        return HttpResponseRedirect(reverse('blog:detail', args=[blog_post.id]))
 
 def delete(request):
     try:
@@ -122,4 +122,4 @@ def create_author(request):
         # Always return an HttpResponseRedirect after successfully dealing
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
-        return HttpResponseRedirect(reverse('blog:author_detail', args=(author.id,)))
+        return HttpResponseRedirect(reverse('blog:author_detail', args=[author.id]))
