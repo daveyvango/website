@@ -20,6 +20,7 @@
 DEPLOY_PATH=/opt/django
 PROJECT=personalpage
 PROC_ID=django
+NGINX_DOC_ROOT=/usr/share/nginx/html
 useradd $PROC_ID
 
 echo "Enabling python"
@@ -44,9 +45,9 @@ echo "Creating, chowning, and chmodding deploy dirs..."
 cp -R personalpage $DEPLOY_PATH/
 chown -R django:nginx $DEPLOY_PATH
 chmod 744 $DEPLOY_PATH/$PROJECT/gunicorn.sh 
-mkdir -p /usr/share/nginx/html/django/static
-chown -R django:nginx /usr/share/nginx/html/django
-chown -R django:django /usr/share/nginx/html/django/static/uploads
+mkdir -p $NGINX_DOC_ROOT/django/static
+chown -R django:nginx $NGINX_DOC_ROOT/django
+chown -R django:django $NGINX_DOC_ROOT/django/static/blog/uploads
 
 echo "Cleaning up settings.py"
 sed -i 's/DEBUG = True/DEBUG = False/g' $DEPLOY_PATH/$PROJECT/$PROJECT/settings.py
@@ -75,6 +76,11 @@ systemctl enable  gunicorn.service
 systemctl restart nginx.service 
 systemctl enable  nginx.service
 
+echo "dropping favicon prior to cellectstatic"
+cp favicon.ico $NGINX_DOC_ROOT/
+chown django:nginx $NGINX_DOC_ROOT/favicon.ico
+chmod 664 $NGINX_DOC_ROOT/favicon.ico
+
 # Allow nginx to be in django's group
 echo "updating nginx user"
 usermod -a -G django nginx
@@ -91,7 +97,7 @@ semanage fcontext -a -t httpd_var_run_t /opt/django/personalpage/personalpage.so
 restorecon /opt/django/personalpage/personalpage.sock
 
 echo "Establishing upload permissions"
-semanage fcontext -a -t httpd_sys_rw_content_t /usr/share/nginx/html/django/static/blog/uploads
-restorecon /usr/share/nginx/html/django/static/blog/uploads
+semanage fcontext -a -t httpd_sys_rw_content_t $NGINX_DOC_ROOT/django/static/blog/uploads
+restorecon $NGINX_DOC_ROOT/django/static/blog/uploads
 
 echo "Should be all set!"
